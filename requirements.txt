@@ -5,3 +5,4 @@ asyncpg
 psycopg2
 envparse
 alembic
+fastapi-users[sqlalchemy]
