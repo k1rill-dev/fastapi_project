@@ -14,7 +14,7 @@ from db.models import User
 from db.connect_db import get_db
 from core import Hasher
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/token")
 
 
 async def _get_user_by_email_for_auth(email: str, session: AsyncSession):
@@ -38,7 +38,7 @@ async def authenticate_user(
 
 async def get_current_user_from_token(
         token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
-):
+) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

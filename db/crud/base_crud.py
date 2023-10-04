@@ -1,11 +1,9 @@
 from typing import TypeVar, Generic, Type
 
-from fastapi import Depends
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from db.connect_db import get_db
-from db.models.users import Base, User
+from db.models.users import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
@@ -19,17 +17,14 @@ class BaseCRUD(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def create(
             self,
-            name: str,
-            surname: str,
-            email: str,
-            hashed_password: str) -> User:
+            **kwargs) -> Type[ModelType]:
         raise NotImplementedError('Interface not implemented')
 
-    def get(self):
-        raise NotImplementedError('Interface not implemented')
+    def get(self, **kwargs) -> Type[ModelType]:
+        ...
 
-    def update(self):
-        raise NotImplementedError('Interface not implemented')
+    def update(self, **kwargs) -> Type[ModelType]:
+        ...
 
-    def delete(self):
-        raise NotImplementedError('Interface not implemented')
+    def delete(self, **kwargs) -> bool:
+        ...
