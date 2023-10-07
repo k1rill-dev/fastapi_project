@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import Depends
 from fastapi import HTTPException
+from fastapi.params import Cookie
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from jose import JWTError
@@ -37,7 +38,7 @@ async def authenticate_user(
 
 
 async def get_current_user_from_token(
-        token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
+        access_token: str = Cookie(...), db: AsyncSession = Depends(get_db)
 ) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -45,7 +46,7 @@ async def get_current_user_from_token(
     )
     try:
         payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+            access_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
         email: str = payload.get("sub")
         if email is None:
