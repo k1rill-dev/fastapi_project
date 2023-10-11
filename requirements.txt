@@ -10,3 +10,4 @@ passlib
 pydantic[email]
 sentry-sdk[fastapi]
 python-jose
+sqladmin[full]
