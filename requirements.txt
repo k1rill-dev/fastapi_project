@@ -5,3 +5,8 @@ asyncpg
 psycopg2
 envparse
 alembic
+bcrypt
+passlib
+pydantic[email]
+sentry-sdk[fastapi]
+python-jose
