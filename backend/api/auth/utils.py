@@ -9,11 +9,11 @@ from jose import JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from backend.core import settings
-from backend.db.crud.user_crud import CrudUser
-from backend.db.models import User
-from backend.db.connect_db import get_db
-from backend.core import Hasher
+from core import settings
+from db.crud.user_crud import CrudUser
+from db.models import User
+from db.connect_db import get_db
+from core import Hasher
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/token")
 

@@ -3,7 +3,7 @@ from typing import TypeVar, Generic, Type
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.db.models.users import Base
+from db.models.users import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)

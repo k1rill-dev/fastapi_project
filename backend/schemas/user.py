@@ -1,6 +1,6 @@
 from pydantic import EmailStr
 
-from backend.schemas.base import Base
+from schemas.base import Base
 
 
 class UserRead(Base):

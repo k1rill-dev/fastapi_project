@@ -4,8 +4,8 @@ from typing import Optional
 from fastapi import HTTPException, Depends
 from starlette import status
 
-from backend.api.auth.utils import oauth2_scheme
-from backend.core import settings
+from api.auth.utils import oauth2_scheme
+from core import settings
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 

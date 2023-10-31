@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.api.auth.utils import get_current_user_from_token
-from backend.core import Hasher
-from backend.db.crud.user_crud import CrudUser
-from backend.db.connect_db import get_db
-from backend.db.models import User
-from backend.schemas.user import UserCreate, UserRead
+from api.auth.utils import get_current_user_from_token
+from core import Hasher
+from db.crud.user_crud import CrudUser
+from db.connect_db import get_db
+from db.models import User
+from schemas.user import UserCreate, UserRead
 
 router = APIRouter()
 

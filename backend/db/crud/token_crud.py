@@ -6,8 +6,8 @@ from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from backend.db.crud.base_crud import BaseCRUD
-from backend.db.models import Token, User
+from db.crud.base_crud import BaseCRUD
+from db.models import Token, User
 
 
 class CrudToken(BaseCRUD):

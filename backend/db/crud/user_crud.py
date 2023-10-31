@@ -3,8 +3,8 @@ from typing import Type, Union
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.db.crud.base_crud import BaseCRUD, ModelType
-from backend.db.models import User
+from db.crud.base_crud import BaseCRUD, ModelType
+from db.models import User
 
 
 class CrudUser(BaseCRUD):

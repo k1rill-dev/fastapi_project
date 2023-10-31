@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - "5432:5432"
+    env_file:
+      - .env.db
+  web:
+    build: backend
+    command: >
+      /bin/sh -c "alembic revision --autogenerate &&
+                  alembic upgrade head &&
+                  python wsgi.py"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - backend/core/.env
+    links:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi-backend.rule=Host(`aboba.localhost`)"
+      - "traefik.http.services.fastapi-backend.loadbalancer.server.port=8000"
+      - "traefik.http.routers.fastapi-backend.tls=true"
+      - "traefik.http.routers.fastapi-backend.tls.certresolver=letsencrypt"
+
+
+
+  traefik: # new
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik-public-certificates:/certificates"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.localhost`)"
+      - "traefik.http.routers.dashboard.tls=true"
+      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.traefik-rtr.entrypoints=web"
+
+
+
+volumes:
+  postgres_data:
+  traefik-public-certificates:

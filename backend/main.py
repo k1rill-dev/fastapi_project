@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sqladmin import Admin, ModelView
 
 from api import router
-from api.auth.handlers.login import login_router
+from api.auth.login import login_router
 import uvicorn
 
 from db.connect_db import engine

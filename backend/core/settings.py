@@ -8,6 +8,10 @@ DATABASE_URL = env.str(
     "DATABASE_URL",
     default="loh",
 )
+DATABASE_URL_ALEMBIC = env.str(
+    "DATABASE_URL_ALEMBIC",
+    default="loh",
+)
 APP_PORT = env.int("APP_PORT")
 SECRET_KEY: str = env.str("SECRET_KEY", default="secret_key")
 SECRET_KEY_REFRESH: str = env.str("SECRET_KEY_REFRESH", default="secret_key")

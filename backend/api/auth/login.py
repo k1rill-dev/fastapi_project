@@ -9,12 +9,12 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import Response
 
-from backend.core import settings
-from backend.db.models import User
+from core import settings
+from db.models import User
 from api.services import TokenService
 from .utils import authenticate_user, _get_user_by_email_for_auth, get_current_user_from_token
-from backend.db.connect_db import get_db
-from backend.core.security import create_access_token, create_refresh_token, verify_refresh_token
+from db.connect_db import get_db
+from core.security import create_access_token, create_refresh_token, verify_refresh_token
 
 login_router = APIRouter(prefix='/login')
 
